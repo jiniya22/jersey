@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.applebox.jersey.domain.entity.User;
+import xyz.applebox.jersey.domain.exception.InvalidRequestException;
 import xyz.applebox.jersey.repository.UserRepository;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class UserService {
     }
 
     public User findById(long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> new InvalidRequestException("조회되는 User가 없습니다."));
     }
 
 }
