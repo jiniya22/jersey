@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: jersey
+  profiles:
+    active: local
