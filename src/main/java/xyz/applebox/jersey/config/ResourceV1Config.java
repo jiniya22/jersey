@@ -11,6 +11,6 @@ import javax.ws.rs.ApplicationPath;
 public class ResourceV1Config extends ResourceConfig {
 
     public ResourceV1Config() {
-        register(IndexEndpoint.class);
+        packages(IndexEndpoint.class.getPackage().getName());
     }
 }
