@@ -2,7 +2,8 @@ package xyz.applebox.jersey.endpoint.v1;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import xyz.applebox.jersey.domain.entity.User;
+import xyz.applebox.jersey.domain.value.DataResponse;
+import xyz.applebox.jersey.domain.value.UserValue;
 import xyz.applebox.jersey.service.UserService;
 
 import javax.ws.rs.GET;
@@ -16,19 +17,19 @@ import java.util.List;
 @RequiredArgsConstructor
 @Component
 @Path("/users")
-public class UserEndpoint {
+public final class UserEndpoint {
 
     private final UserService userService;
 
     @GET
-    public List<User> getAll() {
-        return userService.findAll();
+    public DataResponse<List<UserValue.UserSimpleData>> getAll() {
+        return DataResponse.of(userService.findAll());
     }
 
     @GET
     @Path("/{userId}")
-    public User getOne(@PathParam("userId") Long userId) {
-        return userService.findById(userId);
+    public DataResponse<UserValue.UserData> getOne(@PathParam("userId") Long userId) {
+        return DataResponse.of(userService.findById(userId));
     }
 
 }
