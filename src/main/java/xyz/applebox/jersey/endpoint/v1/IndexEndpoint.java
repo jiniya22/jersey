@@ -7,7 +7,7 @@ import javax.ws.rs.Path;
 
 @Component
 @Path("")
-public class IndexEndpoint {
+public final class IndexEndpoint {
 
     @GET
     public String index() {
