@@ -1,6 +1,7 @@
 package xyz.applebox.jersey.domain.value;
 
 import lombok.Getter;
+import xyz.applebox.jersey.util.MessageUtils;
 
 @Getter
 public class BaseResponse {
@@ -8,12 +9,12 @@ public class BaseResponse {
     private final String reason;
 
     protected BaseResponse(){
-        this.result = "SUCCESS";
+        this.result = MessageUtils.SUCCESS;
         this.reason  = "";
     }
 
     private BaseResponse(String result){
-        this.reason = "FAIL";
+        this.reason = MessageUtils.FAIL;
         this.result = result;
     }
 
