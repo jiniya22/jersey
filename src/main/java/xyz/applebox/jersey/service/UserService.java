@@ -22,8 +22,8 @@ public class UserService {
         return userRepository.findAll().stream().map(UserValue.UserSimpleData::of).collect(Collectors.toList());
     }
 
-    public UserValue.UserData findById(long id) {
-        return userRepository.findById(id).map(UserValue.UserData::of)
+    public UserValue.UserDetailData findById(long id) {
+        return userRepository.findById(id).map(UserValue.UserDetailData::of)
                 .orElseThrow(() -> new BadRequestException("조회되는 User가 없습니다."));
     }
 

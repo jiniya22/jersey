@@ -28,7 +28,7 @@ public final class UserEndpoint {
 
     @GET
     @Path("/{userId}")
-    public DataResponse<UserValue.UserData> getOne(@PathParam("userId") Long userId) {
+    public DataResponse<UserValue.UserDetailData> getOne(@PathParam("userId") Long userId) {
         return DataResponse.of(userService.findById(userId));
     }
 
