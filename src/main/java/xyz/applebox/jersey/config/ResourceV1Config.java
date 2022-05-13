@@ -10,6 +10,7 @@ import javax.ws.rs.ApplicationPath;
 public class ResourceV1Config extends ResourceConfig {
 
     public ResourceV1Config() {
-        packages("xyz.applebox.jersey.endpoint.v1");
+        packages("xyz.applebox.jersey.endpoint.v1", "xyz.applebox.jersey.config.provider");
     }
+
 }
