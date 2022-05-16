@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.logging.log4j.util.Strings;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -12,6 +13,7 @@ import xyz.applebox.jersey.domain.value.UserValue;
 import xyz.applebox.jersey.util.DateTimeUtils;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -85,7 +87,7 @@ public class User {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public static User of(UserValue.Request.UserNB u) {
+    public static User of(@NotNull UserValue.Request.Creation u) {
         return builder().type(u.type()).email(u.email()).name(u.name()).sex(u.sex())
                 .birthDate(Optional.ofNullable(u.birthDate())
                         .map(birthDate -> LocalDate.parse(birthDate, DateTimeUtils.DATE_FORMATTER))
@@ -93,4 +95,10 @@ public class User {
                 .phoneNumber(u.phoneNumber()).password(u.password()).build();
     }
 
+    public void patch(UserValue.Request.Patch u) {
+        if(Strings.isNotBlank(u.email())) this.email = u.email();
+        if(Strings.isNotBlank(u.password())) this.password = u.password();
+        if(Strings.isNotBlank(u.phoneNumber())) this.phoneNumber = u.phoneNumber();
+        if(Strings.isNotBlank(u.type())) this.type = u.type();
+    }
 }
